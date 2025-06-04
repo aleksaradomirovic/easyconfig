@@ -39,6 +39,10 @@ function(auto_configure_option _OPTION)
         set(_DOC "Config option '${_OPTION}'")
     endif()
 
+    if("${${_OPTION}}" STREQUAL "")
+        unset(${_OPTION} CACHE)
+    endif()
+
     if(NOT DEFINED ${_OPTION})
         if(DEFINED _DEFAULT)
             set(_VALUE "${_DEFAULT}")
