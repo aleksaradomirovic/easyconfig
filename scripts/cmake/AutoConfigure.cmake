@@ -68,8 +68,8 @@ function(auto_configure_project)
     cmake_parse_arguments(
         PARSE_ARGV 0
         ""
-        "DEFAULT_BUILD_TYPE;BUILD_SHARED_LIBS"
-        "BUILD_TYPES"
+        "DEFAULT_BUILD_TYPE"
+        "BUILD_TYPES;BUILD_SHARED_LIBS"
         ""
     )
 
@@ -79,7 +79,7 @@ function(auto_configure_project)
     endif()
     auto_configure_option(CMAKE_BUILD_TYPE DOC "Build type" DEFAULT "${_DEFAULT_BUILD_TYPE}" ALLOWED ${_BUILD_TYPES})
 
-    if(NOT _BUILD_SHARED_LIBS)
+    if(NOT DEFINED _BUILD_SHARED_LIBS)
         set(_BUILD_SHARED_LIBS "ON")
     endif()
     auto_configure_option(BUILD_SHARED_LIBS DOC "Building shared libraries" DEFAULT "${_BUILD_SHARED_LIBS}" ALLOWED ${BOOLEAN_OPTIONS_ALLOWED})
