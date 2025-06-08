@@ -20,6 +20,7 @@ function(easyconfig_arg_define FNFN_ARGVAR)
     string(STRIP "${${FNFN_ARGVAR}}" "${FNFN_ARGVAR}")
     if("${${FNFN_ARGVAR}}" STREQUAL "")
         unset("${FNFN_ARGVAR}")
+        unset("${FNFN_ARGVAR}" CACHE)
     endif()
 
     return(PROPAGATE "${FNFN_ARGVAR}")
