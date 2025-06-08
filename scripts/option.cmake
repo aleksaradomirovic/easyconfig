@@ -12,7 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+function(easyconfig_arg_define FNFN_ARGVAR)
+    if(NOT DEFINED "${FNFN_ARGVAR}")
+        return()
+    endif()
+
+    string(STRIP "${${FNFN_ARGVAR}}" "${FNFN_ARGVAR}")
+    if("${${FNFN_ARGVAR}}" STREQUAL "")
+        unset("${FNFN_ARGVAR}")
+    endif()
+
+    return(PROPAGATE "${FNFN_ARGVAR}")
+endfunction()
+
 function(easyconfig_pop_arg FNFN_ARGVAR)
+    easyconfig_arg_define("${FNFN_ARGVAR}")
     if(DEFINED "${FNFN_ARGVAR}")
         return()
     endif()

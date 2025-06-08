@@ -12,12 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cmake_minimum_required(VERSION 3.25)
-project(EasyConfig LANGUAGES NONE)
+function(easyconfig_project)
+    cmake_parse_arguments(
+        PARSE_ARGV 0
+        FN
+        "WARN"
+        "DEFAULT_BUILD_TYPE;BUILD_SHARED_LIBS"
+        "BUILD_TYPES"
+    )
+    if(FN_WARN)
+        set(FN_WARN_ARG "WARN")
+    else()
+        unset(FN_WARN_ARG)
+    endif()
 
-cmake_policy(SET CMP0174 NEW)
+    easyconfig_configure_build_type(DEFAULT ${FN_DEFAULT_BUILD_TYPE} BUILD_TYPES ${FN_BUILD_TYPES})
+    easyconfig_configure_build_shared_libs(DEFAULT ${FN_BUILD_SHARED_LIBS} ${FN_WARN_ARG})
 
-include(scripts/vars.cmake)
-include(scripts/option.cmake)
-include(scripts/buildtype.cmake)
-include(scripts/project.cmake)
+endfunction()

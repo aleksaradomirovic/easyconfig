@@ -21,13 +21,14 @@ function(easyconfig_configure_build_type)
         "BUILD_TYPES"
     )
     list(APPEND FN_BUILD_TYPES ${FN_UNPARSED_ARGUMENTS})
-    string(STRIP "${FN_BUILD_TYPES}" FN_BUILD_TYPES)
 
-    if(FN_BUILD_TYPES STREQUAL "")
+    easyconfig_arg_define(FN_BUILD_TYPES)
+    if(NOT DEFINED FN_BUILD_TYPES)
         list(APPEND FN_BUILD_TYPES "Release;Debug;RelWithDebInfo;MinSizeRel")
     endif()
     message(DEBUG "Permitted build types: ${FN_BUILD_TYPES}")
 
+    easyconfig_arg_define(FN_DEFAULT)
     if(NOT DEFINED FN_DEFAULT)
         list(GET FN_BUILD_TYPES 0 FN_DEFAULT)
     elseif(NOT FN_DEFAULT IN_LIST FN_BUILD_TYPES)
@@ -35,7 +36,8 @@ function(easyconfig_configure_build_type)
     endif()
     message(DEBUG "Default build type: ${FN_DEFAULT}")
 
-    if(NOT DEFINED CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
+    easyconfig_arg_define(CMAKE_BUILD_TYPE)
+    if(NOT DEFINED CMAKE_BUILD_TYPE)
         set(CMAKE_BUILD_TYPE "${FN_DEFAULT}" CACHE STRING "CMake build type" FORCE)
 
         message(WARNING "Build type not specified [CMAKE_BUILD_TYPE]; defaulting to '${CMAKE_BUILD_TYPE}'")
@@ -59,6 +61,7 @@ function(easyconfig_configure_build_shared_libs)
     )
     easyconfig_pop_arg(FN_DEFAULT "ON")
 
+    easyconfig_arg_define(BUILD_SHARED_LIBS)
     if(NOT DEFINED BUILD_SHARED_LIBS)
         set(BUILD_SHARED_LIBS "${FN_DEFAULT}" CACHE BOOL "Build shared libraries" FORCE)
 
