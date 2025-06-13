@@ -70,8 +70,8 @@ function(easyconfig_option FN_NAME)
 
     if(NOT DEFINED "${FN_NAME}")
         set("${FN_NAME}" "${FN_DEFAULT}")
+        set("${FN_NAME}" "${${FN_NAME}}" CACHE "${FN_TYPE}" "${FN_DOC}" FORCE)
     endif()
 
-    set("${FN_NAME}" "${${FN_NAME}}" CACHE "${FN_TYPE}" "${FN_DOC}" FORCE)
     message(DEBUG "Set option ${FN_NAME} to '${${FN_NAME}}'")
 endfunction()
