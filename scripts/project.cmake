@@ -26,6 +26,8 @@ function(easyconfig_project)
         unset(FN_WARN_ARG)
     endif()
 
+    message(DEBUG "Configuring project '${PROJECT_NAME}'")
+
     easyconfig_configure_build_type(DEFAULT ${FN_DEFAULT_BUILD_TYPE} BUILD_TYPES ${FN_BUILD_TYPES})
     easyconfig_configure_build_shared_libs(DEFAULT ${FN_BUILD_SHARED_LIBS} ${FN_WARN_ARG})
 

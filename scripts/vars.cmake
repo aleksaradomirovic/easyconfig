@@ -11,10 +11,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-if(PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-    set(EASYCONFIG_IS_ROOT_PROJECT TRUE CACHE BOOL "Project is root" FORCE)
-else()
-    set(EASYCONFIG_IS_ROOT_PROJECT FALSE CACHE BOOL "Project is root" FORCE)
-endif()
-message(DEBUG "Project ${CMAKE_SOURCE_DIR} is root project: ${EASYCONFIG_IS_ROOT_PROJECT}")
