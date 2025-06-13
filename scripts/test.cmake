@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cmake_minimum_required(VERSION 3.25)
-project(EasyConfig LANGUAGES NONE)
+function(easyconfig_init_main_test)
+    if(NOT EASYCONFIG_BUILD_TESTING)
+        return()
+    endif()
 
-cmake_policy(SET CMP0174 NEW)
+    if(NOT TARGET test)
+        add_custom_target(test)
+    endif()
+endfunction()
 
-include(scripts/vars.cmake)
-include(scripts/option.cmake)
-include(scripts/buildtype.cmake)
-include(scripts/project.cmake)
-
-include(scripts/test.cmake)
+include(scripts/test/gtest.cmake)
