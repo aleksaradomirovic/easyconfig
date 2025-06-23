@@ -32,4 +32,9 @@ function(easyconfig_project)
     easyconfig_configure_build_shared_libs(DEFAULT ${FN_BUILD_SHARED_LIBS} ${FN_WARN_ARG})
 
     easyconfig_option(EASYCONFIG_BUILD_TESTING ON BOOL "Build easyconfig tests")
+    if(EASYCONFIG_BUILD_TESTING)
+        easyconfig_option(EASYTEST_RUN_TARGET_SUFFIX "-run" BOOL)
+
+        easytest_add_category(test SET)
+    endif()
 endfunction()
